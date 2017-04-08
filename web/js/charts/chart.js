@@ -1,4 +1,13 @@
-function drawChart(title, name, data, valueSuffix, max, url) {
+/**
+ *
+ * @param title
+ * @param name
+ * @param data
+ * @param valueSuffix
+ * @param max
+ * @param url
+ */
+function setMap(title, name, data, valueSuffix, max, url) {
     Highcharts.mapChart('map', {
         chart: {
             map: 'countries/ro/ro-all',
@@ -41,23 +50,11 @@ function drawChart(title, name, data, valueSuffix, max, url) {
         }]
     });
 }
-drawChart();
-
-function showCharts(url) {
-    axios.get(url).then(function (response) {
-        console.log(response);
-    }).catch(function (error) {
-        alert(error);
-    });
-}
-
-function density() {
-    fetchData('densityData');
-}
+setMap();
 
 function fetchData(url) {
     axios.get(url).then(function (response) {
-        drawChart(
+        setMap(
             response.data.title,
             response.data.name,
             response.data.data,
@@ -71,4 +68,13 @@ function fetchData(url) {
 
 function driverLicenses() {
     fetchData('driverData');
+}
+
+function urban() {
+    fetchData('surfacesData?type=urban');
+}
+
+
+function rural() {
+    fetchData('surfacesData?type=rural');
 }

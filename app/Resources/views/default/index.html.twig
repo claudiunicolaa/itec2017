@@ -4,13 +4,19 @@
     {{ parent() }}
     <div id="container">
         <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" onclick="setMap()">Statistici Romania</a>
+            </div>
             <ul class="nav navbar-nav">
-                <li class="sidebar-brand">
-                    <a onclick="drawChart()">Statistici Romania</a>
+                <li>
+                    <a onclick="urban()">
+                        Suprafata urban
+                    </a>
                 </li>
                 <li>
-                    <a onclick="density()">
-                        Densitatea Populatiei
+                    <a onclick="rural()">
+                        Suprafata rural
                     </a>
                 </li>
                 <li>
