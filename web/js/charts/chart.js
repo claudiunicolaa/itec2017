@@ -1,4 +1,4 @@
-function drawChart(title, name, data, valueSuffix, max) {
+function drawChart(title, name, data, valueSuffix, max, url) {
     Highcharts.mapChart('map', {
         chart: {
             map: 'countries/ro/ro-all'
@@ -42,14 +42,32 @@ function drawChart(title, name, data, valueSuffix, max) {
 }
 drawChart();
 
+function showCharts(url) {
+    axios.get(url).then(function (response) {
+        console.log(response);
+    }).catch(function (error) {
+        alert(error);
+    });
+}
+
 function density() {
-    axios.get('/densityData').then(function (response) {
-        drawChart(response.data.title, response.data.name, response.data.data, response.valueSuffix, response.max);
+    fetchData('densityData');
+}
+
+function fetchData(url) {
+    axios.get(url).then(function (response) {
+        drawChart(
+            response.data.title,
+            response.data.name,
+            response.data.data,
+            response.data.valueSuffix,
+            response.data.max,
+            response.data.url)
+    }).catch(function (error) {
+        alert(error);
     });
 }
 
 function driverLicenses() {
-    axios.get('/driverData').then(function (response) {
-        drawChart(response.data.title, response.data.name, response.data.data, response.valueSuffix, response.max);
-    });
+    fetchData('driverData');
 }
