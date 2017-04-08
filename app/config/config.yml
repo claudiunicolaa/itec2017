@@ -52,7 +52,8 @@ parameters:
         valcea: vl
         vilcea: vl
         vaslui: vs
-        vrancea: vr
+        vrancea: vn
+#        dgeip: vr
         bucuresti: bi
     dataset.drivers.id: 'e4f9bcbd-820d-4c88-924b-53e2465a92e2'
     dataset.drivers.resource_id: '43e0b12f-cb6a-4718-9a0f-0e3d92ac6c2b'

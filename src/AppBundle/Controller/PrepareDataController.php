@@ -66,7 +66,7 @@ class PrepareDataController extends Controller
             }
             $key = 'ro-'.$abv;
             $responseData[] = [
-                $key, $data[$totalColumn]
+                $key, (int) $data[$totalColumn]
             ];
         }
 
@@ -75,7 +75,7 @@ class PrepareDataController extends Controller
             'name' => 'Ceva cu permisele',
             'data' => $responseData,
             'valueSuffix' => 'persoane',
-            'max' => $maxVal
+            'max' => (int) $maxVal
         ]);
     }
 
