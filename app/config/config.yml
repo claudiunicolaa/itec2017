@@ -7,6 +7,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    api_endpoint: "http://data.gov.ro/api/3"
+    app_proxy : "10.19.1.1:3128"
 
 framework:
     #esi: ~
