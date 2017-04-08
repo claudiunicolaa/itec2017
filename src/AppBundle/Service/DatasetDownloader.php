@@ -19,10 +19,13 @@ class DatasetDownloader
      */
     private $serializer;
 
-    public function __construct($baseUrl, Serializer $serializer)
+    public function __construct($baseUrl, Serializer $serializer, $proxyConfig)
     {
         $this->baseUrl = $baseUrl;
         $this->serializer = $serializer;
+        if ($proxyConfig['ip'] != null) {
+            Request::proxy($proxyConfig['ip'], $proxyConfig['port']);
+        }
     }
 
     /**
