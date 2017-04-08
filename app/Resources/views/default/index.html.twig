@@ -3,6 +3,23 @@
 {% block body %}
     {{ parent() }}
     <div id="container">
+        <nav class="navbar navbar-inverse">
+            <ul class="nav navbar-nav">
+                <li class="sidebar-brand">
+                    <a onclick="drawChart()">Statistici Romania</a>
+                </li>
+                <li>
+                    <a onclick="density()">
+                        Densitatea Populatiei
+                    </a>
+                </li>
+                <li>
+                    <a onclick="driverLicenses()">
+                        Detinatori permis auto
+                    </a>
+                </li>
+            </ul>
+        </nav>
         <div id="map"></div>
     </div>
     </div>

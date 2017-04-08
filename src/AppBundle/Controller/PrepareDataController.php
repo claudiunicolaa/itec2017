@@ -37,7 +37,7 @@ class PrepareDataController extends Controller
                 ['ro-cj', 100],
                 ['ro-ab', 10]
             ],
-            'valueSuffix' => 'km2',
+            'valueSuffix' => ' km2',
             'max' => '10000'
         ];
 
