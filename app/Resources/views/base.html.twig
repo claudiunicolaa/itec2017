@@ -1,21 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/simple-sidebar.css') }}">
     {% endblock %}
 </head>
 <body>
-{% block body %}{% endblock %}
-{% block javascripts %}
-    {#<script src="https://code.highcharts.com/maps/highmaps.js"></script>#}
-    {#<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>#}
-    {#<script src="https://code.highcharts.com/mapdata/countries/ro/ro-all.js"></script>#}
-    <script src="{{ asset('js/highcharts/highmaps.js') }}"></script>
-    <script src="{{ asset('js/highcharts/exporting.js') }}"></script>
-    <script src="{{ asset('js/highcharts/ro-all.js') }}"></script>
-{% endblock %}
+{% block body %}
+<h1 onclick="drawChart()">Statistici Romania</h1>
+<div id="wrapper" class="toggled">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a onclick="density()">
+                    Densitatea Populatiei
+                </a>
+            </li>
+            <li class="sidebar-brand">
+                <a onclick="driverLicenses()">
+                    Soferi
+                </a>
+            </li>
+        </ul>
+    </div>
+    {% endblock %}
+    {% block javascripts %}
+        {#<script src="https://code.highcharts.com/maps/highmaps.js"></script>#}
+        {#<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>#}
+        {#<script src="https://code.highcharts.com/mapdata/countries/ro/ro-all.js"></script>#}
+        <script src="{{ asset('js/axios.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+        <script src="{{ asset('js/highcharts/highmaps.js') }}"></script>
+        <script src="{{ asset('js/highcharts/exporting.js') }}"></script>
+        <script src="{{ asset('js/highcharts/ro-all.js') }}"></script>
+        <script src="{{ asset('js/charts/chart.js') }}"></script>
+        {#<script src="{{ asset('js/romanian-map.js') }}"></script>#}
+    {% endblock %}
 </body>
 </html>
