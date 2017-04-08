@@ -13,49 +13,69 @@ parameters:
         arad: ar
         arges: ag
         bacau: bc
+        bacu: bc
         bihor: bh
         bistrita-nasaud: bn
+        bistriansud: bn
         botosani: bt
+        botoani: bt
         braila: br
         brasov: bv
         buzau: bz
+        buzu: bz
         calarasi: cl
+        clrai: cl
         caras-severin: cs
+        caraseverin: cs
         cluj: cj
         constanta: ct
+        constana: ct
         covasna: cv
         dambovita: db
         dimbovita: db
+        dmbovia: db
         dolj: dj
         galati: gl
+        galai: gl
         giurgiu: gr
         gorj: gj
         harghita: hr
         hunedoara: hd
         ialomita: il
+        ialomia: il
         iasi: is
         ilfov: if
         maramures: mm
+        maramure: mm
         mehedinti: mh
+        mehedini: mh
         mures: ms
+        mure: ms
         neamt: nt
+        neam: nt
         olt: ot
         prahova: ph
         salaj: sj
         satu-mare: sm
+        satumare: sm
         sibiu: sb
         suceava: sv
         teleorman: tr
         timis: tm
+        timi: tm
         tulcea: tl
         valcea: vl
         vilcea: vl
+        vlcea: vl
         vaslui: vs
         vrancea: vn
 #        dgeip: vr
         bucuresti: bi
+        bucureti: bi
     dataset.drivers.id: 'e4f9bcbd-820d-4c88-924b-53e2465a92e2'
     dataset.drivers.resource_id: '43e0b12f-cb6a-4718-9a0f-0e3d92ac6c2b'
+    dataset.surfaces.id: '30bca702-917d-4837-9fe0-0117610d7e68'
+    dataset.surfaces.resource_id: '574e2bee-78c0-4805-b0c0-d4bfefcebed3'
 
 
 framework:

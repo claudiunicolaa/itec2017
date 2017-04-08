@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class PrepareDataController extends Controller
 {
@@ -47,7 +48,7 @@ class PrepareDataController extends Controller
     /**
      * @Route("/driverData", name="getDriverData")
      */
-    public function driverDataAction() :JsonResponse
+    public function driverDataAction(): JsonResponse
     {
         $driversId = $this->getParameter('dataset.drivers.id');
         $resId = $this->getParameter('dataset.drivers.resource_id');
@@ -64,9 +65,9 @@ class PrepareDataController extends Controller
             if (null === $abv) {
                 continue;
             }
-            $key = 'ro-'.$abv;
+            $key = 'ro-' . $abv;
             $responseData[] = [
-                $key, (int) $data[$totalColumn]
+                $key, (int)$data[$totalColumn]
             ];
         }
 
@@ -75,24 +76,83 @@ class PrepareDataController extends Controller
             'name' => $resource->getName(),
             'data' => $responseData,
             'valueSuffix' => ' persoane',
-            'max' => (int) $maxVal
+            'max' => (int)$maxVal
         ]);
     }
 
     /**
+     * @Route("/surfacesData", name="getSurfacesData")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function surfacesDataAction(Request $request): JsonResponse
+    {
+        $driversId = $this->getParameter('dataset.surfaces.id');
+        $resId = $this->getParameter('dataset.surfaces.resource_id');
+        $resource = $this->get('app.dataset_downloader')->getResource($driversId, $resId);
+        $csvData = $this->parseCsv($resource->getContent(), ',');
+        $csvData = $this->transformCsvArray($csvData);
+        $type = $request->query->get('type');
+        if ($type == 'urban') {
+            $typeColumn = 'Total urban (ha)';
+        } else {
+            $typeColumn = 'Total rural (ha)';
+        }
+        $totalColumn = 'Total area (ha)';
+
+        $values = array_map(
+            function ($value) {
+                return str_replace(',', '', $value);
+            },
+            array_column($csvData, $typeColumn)
+        );
+        $maxVal = max($values);
+
+        $responseData = [];
+        foreach ($csvData as $data) {
+            $abv = $this->getCountyAbbreviation($data['Judet']);
+            if (empty($abv)) {
+                continue;
+            }
+            $key = 'ro-' . $abv;
+            $responseData[] = [
+                $key, $this->getPercentage($data[$typeColumn], $maxVal)
+            ];
+        }
+
+        return $this->json([
+            'title' => $resource->getTitle(),
+            'name' => $resource->getName(),
+            'data' => $responseData,
+            'valueSuffix' => ' %',
+            'max' => 100
+        ]);
+    }
+
+    protected function getPercentage($value, $total)
+    {
+        $value = str_replace(',', '', $value);
+        $total = str_replace(',', '', $total);
+
+        $percentage = $value * 100 / $total;
+        return number_format((float)$percentage, 2, '.', '');
+    }
+
+    /**
      * @param $csvData
+     * @param string $sep
      * @return array
      */
-    protected function parseCsv($csvData)
+    protected function parseCsv($csvData, $sep = ';;')
     {
         $lines = explode(PHP_EOL, $csvData);
 
         $resourceData = array();
         foreach ($lines as $line) {
-            $rowValues = str_getcsv($line, ';;');
+            $rowValues = str_getcsv($line, $sep);
             $rowValues = array_map('trim', $rowValues);
-            $rowValues = array_filter($rowValues, function ($v) {return $v != '';});
-            if (count($rowValues) < 1) {
+//            $rowValues = array_filter($rowValues, function ($v) {return $v != '';});
+            if (count($rowValues) <= 1) {
                 continue;
             }
             $resourceData[] = $rowValues;
@@ -122,9 +182,11 @@ class PrepareDataController extends Controller
     {
         $county = strtolower($county);
         $county = str_replace(' ', '-', $county);
+
+        $county = preg_replace("/[^A-Za-z0-9 ]/", '', $county);
         $map = $this->getParameter('county_abbreviations');
         if (!isset($map[$county])) {
-            return null;
+            return $county;
         }
 
         return $map[$county];
