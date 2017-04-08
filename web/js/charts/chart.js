@@ -1,7 +1,8 @@
 function drawChart(title, name, data, valueSuffix, max, url) {
     Highcharts.mapChart('map', {
         chart: {
-            map: 'countries/ro/ro-all'
+            map: 'countries/ro/ro-all',
+            height: (9 / 16 * 100) + '%'
         },
         title: {
             text: title

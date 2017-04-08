@@ -11,32 +11,14 @@
 </head>
 <body>
 {% block body %}
-<div id="wrapper" class="toggled">
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a onclick="drawChart()">Statistici Romania</a>
-            </li>
-            <li>
-                <a onclick="density()">
-                    Densitatea Populatiei
-                </a>
-            </li>
-            <li>
-                <a onclick="driverLicenses()">
-                    Detinatori permis auto
-                </a>
-            </li>
-        </ul>
-    </div>
-    {% endblock %}
-    {% block javascripts %}
-        <script src="{{ asset('js/axios.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-        <script src="{{ asset('js/highcharts/highmaps.js') }}"></script>
-        <script src="{{ asset('js/highcharts/exporting.js') }}"></script>
-        <script src="{{ asset('js/highcharts/ro-all.js') }}"></script>
-        <script src="{{ asset('js/charts/chart.js') }}"></script>
-    {% endblock %}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/axios.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/highcharts/highmaps.js') }}"></script>
+    <script src="{{ asset('js/highcharts/exporting.js') }}"></script>
+    <script src="{{ asset('js/highcharts/ro-all.js') }}"></script>
+    <script src="{{ asset('js/charts/chart.js') }}"></script>
+{% endblock %}
 </body>
 </html>
