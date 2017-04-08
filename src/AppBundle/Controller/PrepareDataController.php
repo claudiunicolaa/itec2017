@@ -51,8 +51,8 @@ class PrepareDataController extends Controller
     {
         $driversId = $this->getParameter('dataset.drivers.id');
         $resId = $this->getParameter('dataset.drivers.resource_id');
-        $csvData = $this->get('app.dataset_downloader')->getResource($driversId, $resId);
-        $csvData = $this->parseCsv($csvData);
+        $resource = $this->get('app.dataset_downloader')->getResource($driversId, $resId);
+        $csvData = $this->parseCsv($resource->getContent());
         $csvData = $this->transformCsvArray($csvData);
 
         $totalColumn = 'Total detinatori';
@@ -71,10 +71,10 @@ class PrepareDataController extends Controller
         }
 
         return $this->json([
-            'title' => 'Soferi',
-            'name' => 'Ceva cu permisele',
+            'title' => $resource->getTitle(),
+            'name' => $resource->getName(),
             'data' => $responseData,
-            'valueSuffix' => 'persoane',
+            'valueSuffix' => ' persoane',
             'max' => (int) $maxVal
         ]);
     }

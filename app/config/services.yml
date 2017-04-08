@@ -6,4 +6,4 @@ parameters:
 services:
     app.dataset_downloader:
         class: AppBundle\Service\DatasetDownloader
-        arguments: ['%api_endpoint%']
+        arguments: ['%api_endpoint%', '@serializer']
