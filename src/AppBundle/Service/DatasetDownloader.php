@@ -2,6 +2,8 @@
 
 namespace AppBundle\Service;
 
+use Unirest\Request;
+
 class DatasetDownloader
 {
     /**
@@ -14,36 +16,33 @@ class DatasetDownloader
         $this->baseUrl = $baseUrl;
     }
 
-    public function getResource($datasetId, $format = 'CSV')
+    public function getResource($datasetId, $resourceId, $format = 'CSV')
     {
         $data = $this->showPackageAction($datasetId);
+
         if ($data['success'] !== true) {
             throw new \Exception(sprintf('Could not retrieve information about dataset with id %s.', $datasetId));
         }
 
         $resourceUrl = null;
         foreach ($data['result']['resources'] as $resource) {
-            if ($resource['format'] == $format) {
+            if ($resource['format'] == $format && $resource['id'] === $resourceId) {
                 $resourceUrl = $resource['url'];
+                break;
             }
         }
 
         if (null === $resourceUrl) {
             throw new \Exception(sprintf('Could not find a resource for dataset with id %s.', $datasetId));
         }
-        $file = file_get_contents($resourceUrl);
-//        $path = '/home/marius/PhpStormProjects/itec/web/datasets/new.csv';
-//        file_put_contents($path, $file);
-        return $file;
+        $response = Request::get($resourceUrl)->raw_body;
+        return $response;
     }
 
     public function showPackageAction($id)
     {
-        $url = sprintf(
-            '%s/action/package_show?id=%s',
-            $this->baseUrl,
-            urlencode($id)
-        );
-        return json_decode(file_get_contents($url), true);
+        $url = sprintf('%s/action/package_show', $this->baseUrl);
+        $response = Request::get($url, [], ['id' => $id]);
+        return json_decode($response->raw_body, true);
     }
 }

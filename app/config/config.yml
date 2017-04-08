@@ -9,6 +9,54 @@ parameters:
     locale: en
     api_endpoint: "http://data.gov.ro/api/3"
     app_proxy : "10.19.1.1:3128"
+    county_abbreviations:
+        alba: ab
+        arad: ar
+        arges: ag
+        bacau: bc
+        bihor: bh
+        bistrita-nasaud: bn
+        botosani: bt
+        braila: br
+        brasov: bv
+        buzau: bz
+        calarasi: cl
+        caras-severin: cs
+        cluj: cj
+        constanta: ct
+        covasna: cv
+        dambovita: db
+        dimbovita: db
+        dolj: dj
+        galati: gl
+        giurgiu: gr
+        gorj: gj
+        harghita: hr
+        hunedoara: hd
+        ialomita: il
+        iasi: is
+        ilfov: if
+        maramures: mm
+        mehedinti: mh
+        mures: ms
+        neamt: nt
+        olt: ot
+        prahova: ph
+        salaj: sj
+        satu-mare: sm
+        sibiu: sb
+        suceava: sv
+        teleorman: tr
+        timis: tm
+        tulcea: tl
+        valcea: vl
+        vilcea: vl
+        vaslui: vs
+        vrancea: vr
+        bucuresti: bi
+    dataset.drivers.id: 'e4f9bcbd-820d-4c88-924b-53e2465a92e2'
+    dataset.drivers.resource_id: '43e0b12f-cb6a-4718-9a0f-0e3d92ac6c2b'
+
 
 framework:
     #esi: ~
