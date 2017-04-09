@@ -49,7 +49,7 @@ function setMap(title, name, data, valueSuffix, max, url) {
         }]
     });
 }
-setMap('teste teste tetestete');
+setMap();
 
 /**
  *
