@@ -8,6 +8,6 @@
 ## Installation
 * clone the project and run ```composer install``` in the project root
 * if composer install fails to complete, install necessary extensions
-* start the server by running ```php bin/console server:start --env=prod```
+* start the server by running ```php bin/console server:start```
  
  Go to ```http://localhost:8000```
