@@ -58,7 +58,7 @@ class PrepareDataController extends Controller
 
         $totalColumn = 'Total detinatori';
         $maxVal = max(array_column($csvData, $totalColumn));
-
+//        var_dump($csvData);
         $responseData = [];
         foreach ($csvData as $data) {
             $abv = $this->getCountyAbbreviation($data['Judet']);
@@ -92,6 +92,7 @@ class PrepareDataController extends Controller
         $resource = $this->get('app.dataset_downloader')->getResource($driversId, $resId);
         $csvData = $this->parseCsv($resource->getContent(), ',');
         $csvData = $this->transformCsvArray($csvData);
+
         $type = $request->query->get('type');
         if ($type == 'urban') {
             $typeColumn = 'Total urban (ha)';
@@ -106,7 +107,7 @@ class PrepareDataController extends Controller
             },
             array_column($csvData, $typeColumn)
         );
-        $maxVal = max($values);
+        $maxVal = max(array_filter($values, 'is_numeric'));
 
         $responseData = [];
         foreach ($csvData as $data) {
@@ -124,7 +125,7 @@ class PrepareDataController extends Controller
             'title' => $resource->getTitle(),
             'name' => $resource->getName(),
             'data' => $responseData,
-            'valueSuffix' => ' %',
+            'valueSuffix' => ' % din totalul zonei de tip '.$type,
             'max' => 100
         ]);
     }
@@ -135,6 +136,9 @@ class PrepareDataController extends Controller
         $total = str_replace(',', '', $total);
 
         $percentage = $value * 100 / $total;
+        if ($percentage == 0) {
+            $percentage = 0.01;
+        }
         return number_format((float)$percentage, 2, '.', '');
     }
 
@@ -183,7 +187,7 @@ class PrepareDataController extends Controller
         $county = strtolower($county);
         $county = str_replace(' ', '-', $county);
 
-        $county = preg_replace("/[^A-Za-z0-9 ]/", '', $county);
+        $county = preg_replace("/[^A-Za-z0-9- ]/", '', $county);
         $map = $this->getParameter('county_abbreviations');
         if (!isset($map[$county])) {
             return $county;

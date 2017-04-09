@@ -12,6 +12,7 @@ parameters:
         alba: ab
         arad: ar
         arges: ag
+        arge: ag
         bacau: bc
         bacu: bc
         bihor: bh
@@ -20,7 +21,9 @@ parameters:
         botosani: bt
         botoani: bt
         braila: br
+        brila: br
         brasov: bv
+        braov: bv
         buzau: bz
         buzu: bz
         calarasi: cl
@@ -44,6 +47,7 @@ parameters:
         ialomita: il
         ialomia: il
         iasi: is
+        iai: is
         ilfov: if
         maramures: mm
         maramure: mm
@@ -56,6 +60,7 @@ parameters:
         olt: ot
         prahova: ph
         salaj: sj
+        slaj: sj
         satu-mare: sm
         satumare: sm
         sibiu: sb
