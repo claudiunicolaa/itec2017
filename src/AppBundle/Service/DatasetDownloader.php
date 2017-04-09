@@ -65,7 +65,7 @@ class DatasetDownloader
         $response = Request::get($url, [], ['id' => $id])->raw_body;
         $response = json_decode($response, true);
         if ($response['success'] !== true) {
-            throw new \Exception(sprintf('Could not retrieve information about dataset with id %s.', $datasetId));
+            throw new \Exception(sprintf('Could not retrieve information about dataset with id %s.', $id));
         }
 
         /** @var Dataset $dataset */
