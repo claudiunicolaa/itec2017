@@ -3,8 +3,8 @@ imports:
 
 parameters:
     app.proxy :
-        ip: "10.19.1.1"
-        port: "3128"
+        ip: null
+        port: null
 
 framework:
     router:
