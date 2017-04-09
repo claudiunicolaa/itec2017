@@ -1,5 +1,4 @@
 /**
- *
  * @param title
  * @param name
  * @param data
@@ -52,6 +51,10 @@ function setMap(title, name, data, valueSuffix, max, url) {
 }
 setMap();
 
+/**
+ *
+ * @param url
+ */
 function fetchData(url) {
     axios.get(url).then(function (response) {
         setMap(
@@ -66,15 +69,23 @@ function fetchData(url) {
     });
 }
 
+/**
+ *
+ */
 function driverLicenses() {
     fetchData('driverData');
 }
 
+/**
+ *
+ */
 function urban() {
     fetchData('surfacesData?type=urban');
 }
 
-
+/**
+ * 
+ */
 function rural() {
     fetchData('surfacesData?type=rural');
 }
