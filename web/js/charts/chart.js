@@ -49,7 +49,7 @@ function setMap(title, name, data, valueSuffix, max, url) {
         }]
     });
 }
-setMap();
+setMap('teste teste tetestete');
 
 /**
  *
@@ -84,7 +84,7 @@ function urban() {
 }
 
 /**
- * 
+ *
  */
 function rural() {
     fetchData('surfacesData?type=rural');
